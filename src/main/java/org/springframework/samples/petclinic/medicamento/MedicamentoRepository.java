@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.owner;
+package org.springframework.samples.petclinic.medicamento;
 
+import org.springframework.samples.petclinic.owner.*;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
@@ -24,7 +24,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Repository class for <code>Pet</code> domain objects All method names are compliant with Spring Data naming
+ * Repository class for <code>Owner</code> domain objects All method names are compliant with Spring Data naming
  * conventions so this interface can easily be extended for Spring Data See here: http://static.springsource.org/spring-data/jpa/docs/current/reference/html/jpa.repositories.html#jpa.query-methods.query-creation
  *
  * @author Ken Krebs
@@ -32,33 +32,33 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Sam Brannen
  * @author Michael Isvy
  */
-public interface PetRepository extends Repository<Pet, Integer> {
+public interface MedicamentoRepository extends Repository<Medicamento, Integer> {
 
     /**
-     * Retrieve all {@link PetType}s from the data store.
-     * @return a Collection of {@link PetType}s.
+     * Retrieve {@link Owner}s from the data store by last name, returning all owners
+     * whose last name <i>starts</i> with the given name.
+     * @param nombre Value to search for
+     * @return a Collection of matching {@link Owner}s (or an empty Collection if none
+     * found)
      */
-    @Query("SELECT ptype FROM PetType ptype ORDER BY ptype.name")
+    @Query("SELECT medicamento FROM Medicamento medicamento where medicamento.nombre LIKE :nombre%")
     @Transactional(readOnly = true)
-    List<PetType> findPetTypes();
-    
-    @Query("SELECT pet FROM Pet pet WHERE pet.id <=:id")
-    @Transactional(readOnly = true)
-    Collection<Pet> findById2(@Param("id") Integer id);
+    Collection<Medicamento> findByNombre(@Param("nombre") String nombre);
 
     /**
-     * Retrieve a {@link Pet} from the data store by id.
+     * Retrieve an {@link Owner} from the data store by id.
      * @param id the id to search for
-     * @return the {@link Pet} if found
+     * @return the {@link Owner} if found
      */
+    @Query("SELECT medicamento FROM Medicamento medicamento WHERE medicamento.id =:id")
     @Transactional(readOnly = true)
-    Pet findById(Integer id);
+    Medicamento findById(@Param("id") Integer id);
 
     /**
-     * Save a {@link Pet} to the data store, either inserting or updating it.
-     * @param pet the {@link Pet} to save
+     * Save an {@link Owner} to the data store, either inserting or updating it.
+     * @param medicamento the {@link Owner} to save
      */
-    void save(Pet pet);
-
+    void save(Medicamento medicamento);
+    
+    void delete(Medicamento medicamento);
 }
-

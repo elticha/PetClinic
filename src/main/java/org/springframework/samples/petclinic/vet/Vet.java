@@ -15,11 +15,13 @@
  */
 package org.springframework.samples.petclinic.vet;
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.Column;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,10 +29,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.xml.bind.annotation.XmlElement;
 
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
+import org.springframework.core.style.ToStringCreator;
 import org.springframework.samples.petclinic.model.Person;
 
 /**
@@ -45,35 +49,94 @@ import org.springframework.samples.petclinic.model.Person;
 @Table(name = "vets")
 public class Vet extends Person {
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "vet_specialties", joinColumns = @JoinColumn(name = "vet_id"), inverseJoinColumns = @JoinColumn(name = "specialty_id"))
-    private Set<Specialty> specialties;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "vet_specialties", joinColumns = @JoinColumn(name = "vet_id"), inverseJoinColumns = @JoinColumn(name = "specialty_id"))
+//    private Set<Specialty> specialties;
+    
+    @Column(name = "telephone")
+    @NotEmpty
+    private String telephone;
+    
+    @Column(name = "Schedule")
+    @NotEmpty
+    private String schedule;
 
-    protected Set<Specialty> getSpecialtiesInternal() {
-        if (this.specialties == null) {
-            this.specialties = new HashSet<>();
-        }
-        return this.specialties;
+    @Column(name = "specialty_id")
+    @NotEmpty
+    private String specialty;
+    
+    public String getSchedule() {
+        return schedule;
     }
 
-    protected void setSpecialtiesInternal(Set<Specialty> specialties) {
-        this.specialties = specialties;
+    public void setSchedule(String schedule) {
+        this.schedule = schedule;
     }
 
-    @XmlElement
-    public List<Specialty> getSpecialties() {
-        List<Specialty> sortedSpecs = new ArrayList<>(getSpecialtiesInternal());
-        PropertyComparator.sort(sortedSpecs,
-                new MutableSortDefinition("name", true, true));
-        return Collections.unmodifiableList(sortedSpecs);
+    public String getTelephone() {
+        return telephone;
     }
 
-    public int getNrOfSpecialties() {
-        return getSpecialtiesInternal().size();
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+  
+
+//    protected Set<Specialty> getSpecialtiesInternal() {
+//        if (this.specialties == null) {
+//            this.specialties = new HashSet<>();
+//        }
+//        return this.specialties;
+//    }
+//
+//    protected void setSpecialtiesInternal(Set<Specialty> specialties) {
+//        this.specialties = specialties;
+//    }
+
+//    @XmlElement
+//    public List<Specialty> getSpecialties() {
+//        List<Specialty> sortedSpecs = new ArrayList<>(getSpecialtiesInternal());
+//        PropertyComparator.sort(sortedSpecs,
+//                new MutableSortDefinition("name", true, true));
+//        return Collections.unmodifiableList(sortedSpecs);
+//    }
+//
+//    public int getNrOfSpecialties() {
+//        return getSpecialtiesInternal().size();
+//    }
+//
+//    public void addSpecialty(Specialty specialty) {
+//        getSpecialtiesInternal().add(specialty);
+//    }
+
+    /**
+     * @return the specialty
+     */
+    public String getSpecialty() {
+        return specialty;
     }
 
-    public void addSpecialty(Specialty specialty) {
-        getSpecialtiesInternal().add(specialty);
+    /**
+     * @param specialty the specialty to set
+     */
+    public void setSpecialty(String specialty) {
+        this.specialty = specialty;
+    }
+    
+     @Override
+    public String toString() {
+        return new ToStringCreator(this)
+
+                .append("id", this.getId()).append("new", this.isNew())
+                .append("lastName", this.getLastName())
+                .append("firstName", this.getFirstName())
+                .append("telephone",this.getTelephone())
+                .append("schedule",this.getSchedule())
+                .append("specialty",this.getSpecialty()).toString();
+        
     }
 
+    String getName() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

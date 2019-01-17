@@ -16,9 +16,11 @@
 package org.springframework.samples.petclinic.vet;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.samples.petclinic.model.NamedEntity;
 
@@ -30,5 +32,16 @@ import org.springframework.samples.petclinic.model.NamedEntity;
 @Entity
 @Table(name = "specialties")
 public class Specialty extends NamedEntity implements Serializable {
+  
+    @Column(name = "name")
+    @NotEmpty
+    public String name;
+    
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 }

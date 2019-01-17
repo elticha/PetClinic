@@ -16,10 +16,14 @@
 package org.springframework.samples.petclinic.vet;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.samples.petclinic.owner.Owner;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -38,9 +42,25 @@ public interface VetRepository extends Repository<Vet, Integer> {
      *
      * @return a <code>Collection</code> of <code>Vet</code>s
      */
+    @Query("SELECT DISTINCT vet FROM Vet vet WHERE vet.lastName LIKE :lastName%")
     @Transactional(readOnly = true)
-    @Cacheable("vets")
+    Collection<Vet> findByLastName(@Param("lastName") String lastName);
+            
+            
     Collection<Vet> findAll() throws DataAccessException;
+
+    void save(Vet vet);
+    
+    void delete(Vet vet);
+
+    @Query("SELECT vet FROM Vet vet WHERE vet.id =:id")
+    @Transactional(readOnly = true)
+    Vet findById(@Param("id") Integer id);
+    
+
+    @Query("SELECT specialty FROM Specialty specialty ORDER BY specialty.name")
+    @Transactional(readOnly = true)
+    List<Specialty> findSpecialtys();  
 
 
 }

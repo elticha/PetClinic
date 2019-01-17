@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * @author Juergen Hoeller
@@ -62,6 +63,21 @@ class PetController {
     public void initPetBinder(WebDataBinder dataBinder) {
         dataBinder.setValidator(new PetValidator());
     }
+    
+        @GetMapping("/pets/pet")
+    public String showVetList(Map<String, Object> model) {
+        Pets pets = new Pets();
+        pets.getPetList().addAll(this.pets.findById2(999999));
+        model.put("pets", pets);
+       // model.put("pets", this.pets.allPet());
+        return "pets/Pets";
+    }
+    
+    @GetMapping("/pets/reports")
+    public String showPetList() {
+        return "/pets/reportes";
+    }
+   
 
     @GetMapping("/pets/new")
     public String initCreationForm(Owner owner, ModelMap model) {
@@ -91,15 +107,6 @@ class PetController {
         Pet pet = this.pets.findById(petId);
         model.put("pet", pet);
         return VIEWS_PETS_CREATE_OR_UPDATE_FORM;
-    }
-    
-    @GetMapping({ "/petsList" })
-    public @ResponseBody Pets showResourcesVetList() {
-        // Here we are returning an object of type 'Pets' rather than a collection of Pet
-        // objects so it is simpler for JSon/Object mapping
-        Pets pets = new Pets();
-        pets.getPetList().addAll(this.pets.findAll());
-        return pets;
     }
 
     @PostMapping("/pets/{petId}/edit")

@@ -1,44 +1,30 @@
 /*
- * Copyright 2002-2013 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package org.springframework.samples.petclinic.owner;
 
-import org.springframework.samples.petclinic.vet.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * Simple domain object representing a list of veterinarians. Mostly here to be used for the 'vets' {@link
- * org.springframework.web.servlet.view.xml.MarshallingView}.
- *
- * @author Arjen Poutsma
- */
+import org.springframework.samples.petclinic.model.NamedEntity;
+
 @XmlRootElement
 public class Pets {
 
-    private List<Pet> pets;
+    private List<Pet> vets;
 
     @XmlElement
     public List<Pet> getPetList() {
-        if (pets == null) {
-            pets = new ArrayList<>();
+        if (vets == null) {
+            vets = new ArrayList<>();
         }
-        return pets;
+        return vets;
     }
 
 }
