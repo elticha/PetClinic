@@ -1,9 +1,9 @@
-INSERT IGNORE INTO vets VALUES (1, 'James', 'Carter');
-INSERT IGNORE INTO vets VALUES (2, 'Helen', 'Leary');
-INSERT IGNORE INTO vets VALUES (3, 'Linda', 'Douglas');
-INSERT IGNORE INTO vets VALUES (4, 'Rafael', 'Ortega');
-INSERT IGNORE INTO vets VALUES (5, 'Henry', 'Stevens');
-INSERT IGNORE INTO vets VALUES (6, 'Sharon', 'Jenkins');
+INSERT IGNORE INTO vets VALUES (1, 'James', 'Carter', '961 569 48 78', '', '1');
+INSERT IGNORE INTO vets VALUES (2, 'Helen', 'Leary', '961 445 74 14', '', '1');
+INSERT IGNORE INTO vets VALUES (3, 'Linda', 'Douglas', '961 121 23 25', '', '3');
+INSERT IGNORE INTO vets VALUES (4, 'Rafael', 'Ortega', '961 456 65 63', '', '3');
+INSERT IGNORE INTO vets VALUES (5, 'Henry', 'Stevens', '961 899 65 47', '', '2');
+INSERT IGNORE INTO vets VALUES (6, 'Sharon', 'Jenkins', '961 002 12 01', '', '1');
 
 INSERT IGNORE INTO specialties VALUES (1, 'radiology');
 INSERT IGNORE INTO specialties VALUES (2, 'surgery');
