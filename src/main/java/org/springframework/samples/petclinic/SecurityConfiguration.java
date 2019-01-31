@@ -47,11 +47,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .and()
                 .formLogin()
                 .permitAll();
-    
-// ** Esta sería la otra propuesta de solución de seguridad ggg **
-
-//        http.authorizeRequests()
-//                .anyRequest().authenticated()
-//                .and().httpBasic();
     }
 }
