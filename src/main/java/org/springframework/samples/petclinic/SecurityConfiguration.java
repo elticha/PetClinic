@@ -17,15 +17,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+    
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    
     @Autowired
     DataSource dataSource;
     
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception
     {
-        auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select username, password, enabled from usuarios where username=?")
-                .passwordEncoder(new BCryptPasswordEncoder());
+        auth.jdbcAuthentication().usersByUsernameQuery("select username, password, enabled from usuarios where username=?")
+                .dataSource(dataSource)
+                .passwordEncoder(bCryptPasswordEncoder);
     }
     
     @Override
@@ -40,6 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 "/vets/find",
                 "/medicamento/find",
                 "/Reportes.html",
+                "/registration",
                 "owners/{ownerId}/edit",
                 "owners/{id}",
                 "/users/report")
