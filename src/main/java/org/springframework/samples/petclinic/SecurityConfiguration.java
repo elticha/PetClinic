@@ -29,14 +29,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     }
     
     @Override
-    public void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests().antMatchers("/","/welcome","/home","/owners/find","/vets/find","/medicamento/find","/Reportes.html")
-//                .authenticated()
-//                .and()
-//                .formLogin()
-//                .permitAll();
-        http.authorizeRequests()
-                .anyRequest().authenticated()
-                .and().httpBasic();
+    public void configure(HttpSecurity http) throws Exception
+    {
+        http.csrf().disable();
+        http.authorizeRequests().antMatchers(
+                "/",
+                "/welcome",
+                "/home",
+                "/owners/find",
+                "/vets/find",
+                "/medicamento/find",
+                "/Reportes.html",
+                "owners/{ownerId}/edit",
+                "owners/{id}",
+                "/users/report")
+                .authenticated()
+                .and()
+                .formLogin()
+                .permitAll();
     }
 }
