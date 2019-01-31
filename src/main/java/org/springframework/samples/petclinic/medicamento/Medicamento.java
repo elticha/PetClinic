@@ -32,16 +32,13 @@ import org.springframework.samples.petclinic.model.Person;
 @Entity
 @Table(name = "medicamento")
 public class Medicamento extends BaseEntity{
-    @Column(name = "nombre")
-    @NotEmpty
+    @Column(name = "nombre" , nullable = false)
     public String nombre;
 
-    @Column(name = "ingrediente_activo")
-    @NotEmpty
+    @Column(name = "ingrediente_activo",  nullable = false)
     public String ingrediente_activo;
 
-    @Column(name = "presentacion")
-    @NotEmpty
+    @Column(name = "presentacion", nullable = false)
     public String presentacion;
 
     public String getNombre() {
