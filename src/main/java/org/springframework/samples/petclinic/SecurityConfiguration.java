@@ -39,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 "/owners/find",
                 "/vets/find",
                 "/medicamento/find",
+                "/producto/find",
                 "/Reportes.html",
                 "owners/{ownerId}/edit",
                 "owners/{id}",
