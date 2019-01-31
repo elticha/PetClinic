@@ -13,7 +13,7 @@
         <th> Nombre de Usuario </th>
         <th> Contraseña </th>
         <th> Email </th>
-        <th> Activo </th>
+        <th> Estado </th>
       </tr>
     </thead>
     <tbody>
@@ -21,7 +21,7 @@
         <td th:text="${user.username}"></td>
         <td th:text="${user.password}"></td>
         <td th:text="${user.email}"></td>
-        <td th:text="${user.enable}"></td>
+        <td th:text="${user.enabled} ? 'Activo' : 'No activo'"></td>
       </tr>
     </tbody>
   </table>

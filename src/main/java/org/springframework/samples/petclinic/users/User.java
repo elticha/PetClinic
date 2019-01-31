@@ -8,30 +8,35 @@
 
 package org.springframework.samples.petclinic.users;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
-import org.springframework.samples.petclinic.model.BaseEntity;
 
 /**
  * @author David Pérez S.
  */
 @Entity
 @Table(name = "usuarios")
-public class User extends BaseEntity{
+public class User implements Serializable {
+    
+    @Id
+    @Column(name="idusuarios")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer id;
     
     @Column(name = "username", nullable=false)
-    
-    private String username;
+    public String username;
     
     @Column(name = "password", nullable=false)
-    
-    private String password;
+    public String password;
     
     @Column(name = "email", nullable=false)
+    public String email;
     
-    private String email;
-    
-    @Column(name = "enable")
-    private Integer enable;   
+    @Column(name = "enabled")
+    public Integer enabled;   
 }

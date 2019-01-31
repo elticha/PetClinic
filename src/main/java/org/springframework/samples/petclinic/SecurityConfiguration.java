@@ -29,12 +29,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     }
     
     @Override
-    public void configure(HttpSecurity http) throws Exception
-    {
-        http.authorizeRequests().antMatchers("/","/welcome","/home","/owners/find","/vets/find","/medicamento/find","/Reportes.html")
-                .authenticated()
-                .and()
-                .formLogin()
-                .permitAll();
+    public void configure(HttpSecurity http) throws Exception {
+//        http.authorizeRequests().antMatchers("/","/welcome","/home","/owners/find","/vets/find","/medicamento/find","/Reportes.html")
+//                .authenticated()
+//                .and()
+//                .formLogin()
+//                .permitAll();
+        http.authorizeRequests()
+                .anyRequest().authenticated()
+                .and().httpBasic();
     }
 }
