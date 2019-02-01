@@ -6,7 +6,7 @@
  * Fecha de Creación: 31/01/20189
  */
 
-package org.springframework.samples.petclinic.users;
+package org.springframework.samples.petclinic.system;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
