@@ -132,6 +132,9 @@ class OwnerController {
         Owner owner = this.owners.findById(ownerId);
         
         String [] x= getCoordinatesAPI(owner).block().split("coordinates")[1].split("\\[")[1].split("\\]")[0].split(",");
+        System.out.println(getCoordinatesAPI(owner).block());
+        System.out.println("");
+        System.out.println(x[0]+" - "+x[1]);
         CenterData center = new CenterData();
         center.setCero(x[0]);
         center.setUno(x[1]);
@@ -144,7 +147,7 @@ class OwnerController {
     public Mono<String> getCoordinatesAPI(Owner owner) {
         WebClient webClient = WebClient.create("https://api.mapbox.com/geocoding/v5/mapbox.places");
         return webClient.get()
-            .uri("/{address}%2C%20{city}%2C%20{estado}%2C%20{country}.json?limit=1&access_token=pk.eyJ1IjoidG90b2ciLCJhIjoiY2pyOWVjMmsyMGExNzN5bW00bmV0Y28wNCJ9.j5ehwrvxguCDgCl-9Ah2LA",owner.getAddress(), owner.getCity(),owner.getEstado(), owner.getCountry())
+            .uri("/{address} {city} {estado} {country}.json?limit=1&access_token=pk.eyJ1IjoidG90b2ciLCJhIjoiY2pyOWVjMmsyMGExNzN5bW00bmV0Y28wNCJ9.j5ehwrvxguCDgCl-9Ah2LA",owner.getAddress(), owner.getCity(),owner.getEstado(), owner.getCountry())
             .retrieve()
             .bodyToMono(String.class);
     }

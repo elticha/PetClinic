@@ -56,6 +56,8 @@ CREATE TABLE IF NOT EXISTS `petclinic`.`owners` (
   `last_name` VARCHAR(30) NULL DEFAULT NULL,
   `address` VARCHAR(255) NULL DEFAULT NULL,
   `city` VARCHAR(80) NULL DEFAULT NULL,
+  `country` VARCHAR(80) NULL DEFAULT NULL,
+  `estado` VARCHAR(80) NULL DEFAULT NULL,
   `telephone` VARCHAR(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `last_name` (`last_name` ASC))
