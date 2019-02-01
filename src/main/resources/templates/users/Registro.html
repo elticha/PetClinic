@@ -5,13 +5,10 @@
         <title>Registration Form</title>
         <!-- <link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" /> -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <form th:action="@{/}" method="get">
-            <button class="btn btn-md btn-warning btn-block" type="Submit">Ir a Login</button>
-        </form>	
 
         <div class="container">
             <div class="row">
@@ -20,6 +17,7 @@
                           th:object="${user}" method="post" class="form-horizontal"
                           role="form">
                         <h2>Formulario de Registro</h2>
+                        <br>
                         <div class="form-group">
                             <div class="col-sm-9">
                                 <input type="text" th:field="*{username}" placeholder="Nombre de usuario" class="form-control" /> 
@@ -49,8 +47,19 @@
                         </div>
 
                         <span th:utext="${successMessage}"></span>
-                        
                     </form>
+                    <!-- Botón de ir a login -->
+                    <ul class="nav navbar-nav">
+                        <li th:fragment="menuItem (path,text)">
+                            <a th:href="@{__${path}__}">
+                                <span th:text="${text}">Template</span>
+                            </a>
+                        </li>
+                        <li th:replace="::menuItem ('/login',${textoLogin})">
+                            <span>Ir a Login</span>
+                        </li>
+                    </ul>
+                    <!-- Termina Botón de ir a login -->
                 </div>
             </div>
         </div>

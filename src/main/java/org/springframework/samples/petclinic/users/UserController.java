@@ -60,6 +60,7 @@ public class UserController {
         } else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "El usuario ha sido registrado exitosamente");
+            modelAndView.addObject("textoLogin", "Ir a Login");
             modelAndView.addObject("user", new User());
             modelAndView.setViewName("users/Registro");
 

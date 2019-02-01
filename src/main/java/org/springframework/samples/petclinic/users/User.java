@@ -5,10 +5,8 @@
  * Universidad Politécnica de Chiapas
  * Fecha de Creación: 29/01/2019 
  */
-
 package org.springframework.samples.petclinic.users;
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,35 +19,40 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "usuarios")
-public class User implements Serializable {
-    
+public class User {
+
     @Id
-    @Column(name="idusuarios")
+    @Column(name = "idusuarios")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
-    @Column(name = "username", nullable=false)
+
+    @Column(name = "username", nullable = false)
     private String username;
-    
-    @Column(name = "password", nullable=false)
+
+    @Column(name = "password", nullable = false)
     private String password;
-    
-    @Column(name = "email", nullable=false)
+
+    @Column(name = "email")
     private String email;
-    
+
     @Column(name = "enabled")
     private Integer enabled;
-    
-    @Column(name = "codigopostal", nullable=false)
+
+    @Column(name = "codigopostal", nullable = false)
     private String codigopostal;
-    
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "authority")
+    //private Authority authority;
+
     public Integer getId() {
         return this.id;
     }
-    
+
     public String getUsername() {
         return this.username;
     }
+
     public String getPassword() {
         return this.password;
     }
@@ -65,11 +68,15 @@ public class User implements Serializable {
     public String getCodigopostal() {
         return this.codigopostal;
     }
-    
+
+//    public Authority getAuthority() {
+//        return this.authority;
+//    }
+
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -85,8 +92,12 @@ public class User implements Serializable {
     public void setEnabled(Integer enabled) {
         this.enabled = enabled;
     }
-    
+
     public void setCodigopostal(String codigopostal) {
         this.codigopostal = codigopostal;
-    }    
+    }
+
+//    public void setAuthority(Authority authority) {
+//        this.authority = authority;
+//    }
 }

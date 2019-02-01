@@ -32,7 +32,7 @@ public class PetClinicApplication {
     public static void main(String[] args) {
         SpringApplication.run(PetClinicApplication.class, args);
         BCryptPasswordEncoder c = new BCryptPasswordEncoder();
-        System.out.println("\n\nPass => " + c.encode("1")+"\n\n");
+        System.out.println("\n\nPass => " + c.encode("12345")+"\n\n");
     }
 
 }
