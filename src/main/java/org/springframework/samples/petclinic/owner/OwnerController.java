@@ -144,7 +144,7 @@ class OwnerController {
     public Mono<String> getCoordinatesAPI(Owner owner) {
         WebClient webClient = WebClient.create("https://api.mapbox.com/geocoding/v5/mapbox.places");
         return webClient.get()
-            .uri("/{address}%2C%20{city}.json?limit=1&access_token=pk.eyJ1IjoidG90b2ciLCJhIjoiY2pyOWVjMmsyMGExNzN5bW00bmV0Y28wNCJ9.j5ehwrvxguCDgCl-9Ah2LA",owner.getAddress(), owner.getCity())
+            .uri("/{address}%2C%20{city}%2C%20{estado}%2C%20{country}.json?limit=1&access_token=pk.eyJ1IjoidG90b2ciLCJhIjoiY2pyOWVjMmsyMGExNzN5bW00bmV0Y28wNCJ9.j5ehwrvxguCDgCl-9Ah2LA",owner.getAddress(), owner.getCity(),owner.getEstado(), owner.getCountry())
             .retrieve()
             .bodyToMono(String.class);
     }

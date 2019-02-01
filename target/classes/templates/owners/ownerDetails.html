@@ -9,7 +9,7 @@
     <h2 th:text="#{oi}">Owner Informationss</h2>
   
   
-    <table class="table table-striped" th:object="${owner}">
+    <table class="table table-striped" th:object="${model.owner}">
       <tr>
         <th th:text="#{fn}">Name</th>
         <td><b th:text="*{firstName + ' ' + lastName}"></b></td>
@@ -28,20 +28,23 @@
       </tr>
     </table>
   
-    <a th:text="#{eo}" th:href="@{{id}/edit(id=${owner.id})}" class="btn btn-default">Edit
+    <a th:text="#{eo}" th:href="@{{id}/edit(id=${model.owner.id})}" class="btn btn-default">Edit
       Owner</a>
       
-    <a th:text="#{anp}" th:href="@{{id}/pets/new(id=${owner.id})}" class="btn btn-default">Add
+    <a th:text="#{anp}" th:href="@{{id}/pets/new(id=${model.owner.id})}" class="btn btn-default">Add
       New Pet</a>
   
     <br />
+    <br />
+    <div id='map' class="map"></div>
+    <div th:text="${model.coordinates}" class="grab-location"  hidden>toto</div>
     <br />
     <br />
     <h2 th:text="#{pv}">Pets and Visits</h2>
   
     <table class="table table-striped">
   
-      <tr th:each="pet : ${owner.pets}">
+      <tr th:each="pet : ${model.owner.pets}">
         <td valign="top">
           <dl class="dl-horizontal">
             <dt th:text="#{fn}">Name</dt>
@@ -67,10 +70,10 @@
             </tr>
             <tr>
               <td><a
-                th:text="#{ep}" th:href="@{{ownerId}/pets/{petId}/edit(ownerId=${owner.id},petId=${pet.id})}">Edit
+                th:text="#{ep}" th:href="@{{ownerId}/pets/{petId}/edit(ownerId=${model.owner.id},petId=${pet.id})}">Edit
                   Pet</a></td>
               <td><a
-                th:text="#{av}" th:href="@{{ownerId}/pets/{petId}/visits/new(ownerId=${owner.id},petId=${pet.id})}">Add
+                th:text="#{av}" th:href="@{{ownerId}/pets/{petId}/visits/new(ownerId=${model.owner.id},petId=${pet.id})}">Add
                   Visit</a></td>
             </tr>
           </table>
@@ -79,6 +82,42 @@
   
     </table>
   
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoidG90b2ciLCJhIjoiY2pyOWVjMmsyMGExNzN5bW00bmV0Y28wNCJ9.j5ehwrvxguCDgCl-9Ah2LA';
+        
+        var coordinates = document.getElementsByClassName('grab-location')[0].innerHTML.split(",");
+        console.log(document.getElementsByClassName('grab-location')[0].innerHTML);
+        var latitude = parseFloat(coordinates[0]);
+        var longitude = parseFloat(coordinates[1]);
+        
+        var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v10',
+        center: [latitude, longitude], 
+        zoom: 15
+        });
+        
+        var geojson = {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [latitude, longitude]
+            },
+            properties: {
+              title: 'Mapbox',
+              description: 'Casa'
+           }
+        }
+
+        // create a HTML element for each feature
+        var el = document.createElement('div');
+        el.className = 'marker';
+
+        // make a marker for each feature and add to the map
+        new mapboxgl.Marker(el)
+          .setLngLat(geojson.geometry.coordinates)
+          .addTo(map);
+    </script>
   </body>
 
 </html>

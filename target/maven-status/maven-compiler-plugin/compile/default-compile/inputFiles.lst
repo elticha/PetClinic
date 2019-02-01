@@ -4,6 +4,7 @@
 /Users/paula/Documents/mantenimiento/PetClinic/src/main/java/org/springframework/samples/petclinic/owner/OwnerController.java
 /Users/paula/Documents/mantenimiento/PetClinic/src/main/java/org/springframework/samples/petclinic/producto/Producto.java
 /Users/paula/Documents/mantenimiento/PetClinic/src/main/java/org/springframework/samples/petclinic/medicamento/MedicamentoRepository.java
+/Users/paula/Documents/mantenimiento/PetClinic/src/main/java/org/springframework/samples/petclinic/owner/CenterData.java
 /Users/paula/Documents/mantenimiento/PetClinic/src/main/java/org/springframework/samples/petclinic/system/Log.java
 /Users/paula/Documents/mantenimiento/PetClinic/src/main/java/org/springframework/samples/petclinic/users/WebMvcConfig.java
 /Users/paula/Documents/mantenimiento/PetClinic/src/main/java/org/springframework/samples/petclinic/medicamento/Medicamento.java

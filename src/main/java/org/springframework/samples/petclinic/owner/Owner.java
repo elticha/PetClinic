@@ -28,6 +28,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
+import org.hibernate.annotations.ColumnDefault;
 
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
@@ -52,6 +53,16 @@ public class Owner extends Person {
     @Column(name = "city")
     @NotEmpty
     private String city;
+    
+    @Column(name = "country")
+    @NotEmpty
+    @ColumnDefault("-1")
+    private String country;
+    
+    @Column(name = "estado")
+    @NotEmpty
+    @ColumnDefault("-1")
+    private String estado;
 
     @Column(name = "telephone")
     @NotEmpty
@@ -75,6 +86,22 @@ public class Owner extends Person {
 
     public void setCity(String city) {
         this.city = city;
+    }
+    
+    public String getCountry() {
+        return this.country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    
+    public String getEstado() {
+        return this.estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getTelephone() {
@@ -147,6 +174,8 @@ public class Owner extends Person {
                 .append("id", this.getId()).append("new", this.isNew())
                 .append("lastName", this.getLastName())
                 .append("firstName", this.getFirstName()).append("address", this.address)
-                .append("city", this.city).append("telephone", this.telephone).toString();
+                .append("city", this.city).append("country", this.country)
+                .append("estado", this.estado)
+                .append("telephone", this.telephone).toString();
     }
 }
