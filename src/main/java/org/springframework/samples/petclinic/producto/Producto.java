@@ -18,15 +18,24 @@ import org.springframework.samples.petclinic.model.BaseEntity;
 @Entity
 @Table(name = "producto")
 public class Producto extends BaseEntity{
-     @Column(name = "nombre" , nullable = false)
+     @Column(name = "nombre")
      String nombre;
-     @Column(name = "descripcion" , nullable = false)
+     @Column(name = "descripcion")
      String descripcion;
-     @Column(name = "numero_serie" , nullable = false)
+     @Column(name = "numero_serie")
      String numero_serie;
-     @Column(name = "cantidad" , nullable = false)
+     @Column(name = "cantidad")
      String cantidad;
+     @Column(name = "precio")
+     String precio;
 
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
+    }
     public String getNombre() {
         return nombre;
     }

@@ -9,16 +9,18 @@
       <input
         th:replace="~{fragments/inputField :: input ('Nombre', 'nombre', 'text')}" />
       <input
-        th:replace="~{fragments/inputField :: input ('Ingrediente(s) activo(s)', 'descripcion', 'text')}" />
+        th:replace="~{fragments/inputField :: input ('Descripción', 'descripcion', 'text')}" />
       <input
-        th:replace="~{fragments/inputField :: input ('Presentacion', 'numero_serie', 'text')}" />
+        th:replace="~{fragments/inputField :: input ('Número de Serie', 'numero_serie', 'text')}" />
       <input
           th:replace="~{fragments/inputField :: input ('Cantidad', 'cantidad', 'text')}" />
+      <input
+          th:replace="~{fragments/inputField :: input ('Prcio', 'precio', 'text')}" />
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-10">
         <button
-          th:with="text=${producto['new']} ? 'Agregar medicamento' : 'Actualizar medicamento'"
+          th:with="text=${producto['new']} ? 'Agregar Producto' : 'Actualizar Producto'"
           class="btn btn-default" type="submit" th:text="${text}">Agregar Producto</button>
           
       </div>

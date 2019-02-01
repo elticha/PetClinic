@@ -19,6 +19,19 @@ import org.springframework.transaction.annotation.Transactional;
  * @author bodeg
  */
 public interface ProductoRepository extends Repository<Producto, Integer>{
+    
+    @Query("SELECT producto FROM Producto producto WHERE producto.id =:id")
+    @Transactional(readOnly = true)
+    Producto findById(@Param("id") Integer id);
+
+    @Query("SELECT DISTINCT producto FROM Producto producto")
+    @Transactional(readOnly = true)
+    Collection<Producto> buscarProductos();
+    
+    @Query("SELECT producto FROM Producto producto where producto.nombre LIKE :nombre%")
+    @Transactional(readOnly = true)
+    Collection<Producto> findByNombre(@Param("nombre") String nombre);
+    
     void save(Producto producto);
 
     void delete(Producto producto);
