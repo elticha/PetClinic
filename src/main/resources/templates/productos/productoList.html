@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'producto')}">
+
+    <body>
+        
+    <h2">Productos</h2>
+
+    <table id="productos" class="table table-striped">
+        <thead>
+        <tr>
+            <th style="width: 150px;">Nombre</th>
+            <th style="width: 200px;">Descripcion</th>
+            <th >Número de Serie</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr th:each="producto : ${selections}">
+              <td>
+                  <a th:href="@{/producto/__${producto.id}__}" th:text="${producto.nombre}"/></a>
+              </td>
+              <td th:text="${producto.descripcion}"/>
+              <td th:text="${producto.numero_serie}"/>    
+              <td th:text="${producto.cantidad}"/>
+              <td th:text="${producto.precio}"/>
+          </tr>
+        </tbody>
+    </table>
+
+    </body>
+</html>
