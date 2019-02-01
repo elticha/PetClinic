@@ -148,5 +148,20 @@ class OwnerController {
             .retrieve()
             .bodyToMono(String.class);
     }
+    
+//    Owners report
+    @GetMapping("/ownersReport")
+    public String processFindForm2(Owner owner, BindingResult result, Map<String, Object> model) {
+        Collection<Owner> results = this.owners.findByLastName("");
+        if (results.isEmpty()) {
+            // no owners found
+            result.rejectValue("lastName", "No owners to report", "Empty owners");
+            return "owners/findOwners";
+        } else {
+            // multiple owners found
+            model.put("selections", results);
+            return "owners/ownersReport";
+        }
+    }
 
 }
