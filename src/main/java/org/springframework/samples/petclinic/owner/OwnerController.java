@@ -132,9 +132,6 @@ class OwnerController {
         Owner owner = this.owners.findById(ownerId);
         
         String [] x= getCoordinatesAPI(owner).block().split("coordinates")[1].split("\\[")[1].split("\\]")[0].split(",");
-        System.out.println(getCoordinatesAPI(owner).block());
-        System.out.println("");
-        System.out.println(x[0]+" - "+x[1]);
         CenterData center = new CenterData();
         center.setCero(x[0]);
         center.setUno(x[1]);
