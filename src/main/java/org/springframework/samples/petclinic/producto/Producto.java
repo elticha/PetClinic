@@ -28,7 +28,26 @@ public class Producto extends BaseEntity{
      String cantidad;
      @Column(name = "precio")
      String precio;
+     @Column(name = "file")
+     String file;
+     @Column(name = "filestring")
+     String filestring;
 
+    public String getFilestring() {
+        return filestring;
+    }
+
+    public void setFilestring(String filestring) {
+        this.filestring = filestring;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
     public String getPrecio() {
         return precio;
     }

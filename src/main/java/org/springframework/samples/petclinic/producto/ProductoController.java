@@ -5,9 +5,12 @@
  */
 package org.springframework.samples.petclinic.producto;
 
-import java.util.Map;
-import javax.validation.Valid;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +20,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Map;
-import org.springframework.samples.petclinic.owner.Owner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ProductoController {
+    private static String UPLOADED_FOLDER = "F://temp//";
     private static final String VIEW_PRODUCTOS = "productos/createOrUpdateProductoForm";
     private final ProductoRepository producto;
 
@@ -49,6 +55,7 @@ public class ProductoController {
         if (result.hasErrors()) {
             return VIEW_PRODUCTOS;
         } else {
+            
             this.producto.save(producto);
             return "redirect:/producto/find";
         }
@@ -63,9 +70,8 @@ public class ProductoController {
     @GetMapping("/producto")
     public String processFindForm(Producto producto, BindingResult result, Map<String, Object> model) {
 
-        // allow parameterless GET request for /owners to return all records
         if (producto.getNombre() == null) {
-            producto.setNombre(""); // empty string signifies broadest possible search
+            producto.setNombre("");
         }
 
 
@@ -75,11 +81,10 @@ public class ProductoController {
             result.rejectValue("nombre", "notFound", "not found");
             return "productos/findProductos";
         } else if (results.size() == 1) {
-            // 1 owner found
             producto = results.iterator().next();
             return "redirect:/producto/" + producto.getId();
         } else {
-            // multiple owners found
+           
             model.put("selections", results);
             return "producto/productoList";
         }
@@ -129,5 +134,10 @@ public class ProductoController {
             return "productos/productosReport";
         }
     }
+    
+    
+    
+    //----------------------------------------------------------------
+ 
 
 }

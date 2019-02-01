@@ -8,12 +8,16 @@ package org.springframework.samples.petclinic.producto;
 
 import org.springframework.samples.petclinic.owner.*;
 import java.util.Collection;
+import java.util.stream.Stream;
+import javax.annotation.Resource;
+import javax.validation.Path;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.medicamento.Medicamento;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 /**
  *
  * @author bodeg
@@ -35,4 +39,5 @@ public interface ProductoRepository extends Repository<Producto, Integer>{
     void save(Producto producto);
 
     void delete(Producto producto);
+    
 }

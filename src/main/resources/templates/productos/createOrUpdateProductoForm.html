@@ -1,30 +1,53 @@
 <html xmlns:th="http://www.thymeleaf.org"
-  th:replace="~{fragments/layout :: layout (~{::body},'producto')}">
+      th:replace="~{fragments/layout :: layout (~{::body},'producto')}">
 
-<body>
+    <body>
 
-  <h2>Medicamento</h2>
-  <form th:object="${producto}" class="form-horizontal" id="add-producto-form" method="post">
-    <div class="form-group has-feedback">
-      <input
-        th:replace="~{fragments/inputField :: input ('Nombre', 'nombre', 'text')}" />
-      <input
-        th:replace="~{fragments/inputField :: input ('Descripción', 'descripcion', 'text')}" />
-      <input
-        th:replace="~{fragments/inputField :: input ('Número de Serie', 'numero_serie', 'text')}" />
-      <input
-          th:replace="~{fragments/inputField :: input ('Cantidad', 'cantidad', 'text')}" />
-      <input
-          th:replace="~{fragments/inputField :: input ('Prcio', 'precio', 'text')}" />
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button
-          th:with="text=${producto['new']} ? 'Agregar Producto' : 'Actualizar Producto'"
-          class="btn btn-default" type="submit" th:text="${text}">Agregar Producto</button>
-          
-      </div>
-    </div>
-  </form>
-</body>
+        <h2>Medicamento</h2>
+        <form th:object="${producto}" class="form-horizontal" id="add-producto-form" method="post">
+            <div class="form-group has-feedback">
+                <input
+                    th:replace="~{fragments/inputField :: input ('Nombre', 'nombre', 'text')}" />
+                <input
+                    th:replace="~{fragments/inputField :: input ('Descripción', 'descripcion', 'text')}" />
+                <input
+                    th:replace="~{fragments/inputField :: input ('Número de Serie', 'numero_serie', 'text')}" />
+                <input
+                    th:replace="~{fragments/inputField :: input ('Cantidad', 'cantidad', 'text')}" />
+                <input
+                    th:replace="~{fragments/inputField :: input ('Precio', 'precio', 'text')}" />
+
+                <input value="Seleccionar" name="file" type="file" id="file"/>
+
+                <input th:replace="~{fragments/inputField :: input ('', 'filestring', 'text')}" id="filestring" type="hidden"/>
+
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button
+                        th:with="text=${producto['new']} ? 'Agregar Producto' : 'Actualizar Producto'"
+                        class="btn btn-default" type="submit" th:text="${text}">Agregar Producto</button>
+
+                </div>
+            </div>
+        </form>
+        <script type="text/javascript">
+            var fullPath = document.getElementById('file');
+
+            fullPath.addEventListener("change", function () {
+                if (fullPath.value) {
+
+                    var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+                    var filename = fullPath.substring(startIndex);
+                    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                        filename = filename.substring(1);
+                    }
+                    document.getElementById("filestring").value = filename;
+                }
+            });
+
+
+
+        </script>
+    </body>
 </html>
