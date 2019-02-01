@@ -27,7 +27,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 /**
  * @author Juergen Hoeller
@@ -125,9 +128,25 @@ class OwnerController {
      */
     @GetMapping("/owners/{ownerId}")
     public ModelAndView showOwner(@PathVariable("ownerId") int ownerId) {
-        ModelAndView mav = new ModelAndView("owners/ownerDetails");
-        mav.addObject(this.owners.findById(ownerId));
-        return mav;
+        Map<String, Object> model = new HashMap<String, Object>();
+        Owner owner = this.owners.findById(ownerId);
+        
+        String [] x= getCoordinatesAPI(owner).block().split("coordinates")[1].split("\\[")[1].split("\\]")[0].split(",");
+        CenterData center = new CenterData();
+        center.setCero(x[0]);
+        center.setUno(x[1]);
+        
+        model.put("owner", owner);
+        model.put("coordinates", center);
+        return new ModelAndView("owners/ownerDetails", "model", model);
+    }
+    
+    public Mono<String> getCoordinatesAPI(Owner owner) {
+        WebClient webClient = WebClient.create("https://api.mapbox.com/geocoding/v5/mapbox.places");
+        return webClient.get()
+            .uri("/{address}%2C%20{city}.json?limit=1&access_token=pk.eyJ1IjoidG90b2ciLCJhIjoiY2pyOWVjMmsyMGExNzN5bW00bmV0Y28wNCJ9.j5ehwrvxguCDgCl-9Ah2LA",owner.getAddress(), owner.getCity())
+            .retrieve()
+            .bodyToMono(String.class);
     }
 
 }
