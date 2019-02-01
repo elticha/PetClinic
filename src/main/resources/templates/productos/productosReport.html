@@ -12,6 +12,7 @@
                     <th style="width: 100px;">Número de Serie</th>
                     <th style="width: 100px;">Cantidad</th>
                     <th style="width: 50px;">Precio</th>
+                    <th style="width: 50px;">Foto</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,7 +23,7 @@
                     <td th:text="${producto.numero_serie}"/>
                     <td th:text="${producto.cantidad}"/>
                     <td th:text="${producto.precio}"/>
-        
+                    <td><img th:src="@{/resources/imagenes/__$[producto.file__}"</td>
                 </tr>
             </tbody>
         </table>

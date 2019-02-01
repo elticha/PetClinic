@@ -17,9 +17,10 @@
                 <input
                     th:replace="~{fragments/inputField :: input ('Precio', 'precio', 'text')}" />
 
-                <input value="Seleccionar" name="file" type="file" id="file"/>
-
-                <input th:replace="~{fragments/inputField :: input ('', 'filestring', 'text')}" id="filestring" type="hidden"/>
+                <input  id="archivo" value="Seleccionar" name="file" type="file"/>
+                
+                <input id="foto" type="hidden" name="file" value=""/>
+                <input />
 
             </div>
             <div class="form-group">
@@ -32,21 +33,13 @@
             </div>
         </form>
         <script type="text/javascript">
-            var fullPath = document.getElementById('file');
-
-            fullPath.addEventListener("change", function () {
-                if (fullPath.value) {
-
-                    var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
-                    var filename = fullPath.substring(startIndex);
-                    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-                        filename = filename.substring(1);
-                    }
-                    document.getElementById("filestring").value = filename;
-                }
+            var fullPath = document.getElementById("archivo");
+            fullPath.addEventListener("change", function(){
+               if(fullPath.value){
+                   var name = fullPath.files[0].name;
+                   document.getElementById("foto").value = name;
+               } 
             });
-
-
 
         </script>
     </body>

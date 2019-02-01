@@ -32,6 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ProductoController {
     private static String UPLOADED_FOLDER = "F://temp//";
     private static final String VIEW_PRODUCTOS = "productos/createOrUpdateProductoForm";
+    private static String direccionUrl = System.getProperty("user.dir")+"/src/main/resources/static/resources/imagenes";
     private final ProductoRepository producto;
 
     public ProductoController(ProductoRepository productos) {
@@ -51,10 +52,16 @@ public class ProductoController {
     }
 
     @PostMapping("/producto/new")
-    public String processCreationForm(@Valid Producto producto, BindingResult result) {
+    public String processCreationForm(@RequestParam("file") MultipartFile[]f, @Valid Producto producto, BindingResult result) throws IOException {
+       StringBuilder filesNames = new StringBuilder();
         if (result.hasErrors()) {
             return VIEW_PRODUCTOS;
         } else {
+            for(MultipartFile file:f){
+                Path fileNameAndPath = Paths.get(direccionUrl, file.getOriginalFilename());
+                filesNames.append(file.getOriginalFilename());
+                Files.write(fileNameAndPath, file.getBytes());
+            }
             
             this.producto.save(producto);
             return "redirect:/producto/find";
