@@ -9,7 +9,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
-
+        <form th:action="@{/}" method="get">
+            <button class="btn btn-md btn-warning btn-block" type="Submit">Regresar a Login</button>
+        </form>	
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
@@ -20,7 +22,7 @@
                         <br>
                         <div class="form-group">
                             <div class="col-sm-9">
-                                <input type="text" th:field="*{username}" placeholder="Nombre de usuario" class="form-control" /> 
+                                <input type="text" th:field="*{username}" placeholder="Nombre de usuario" class="form-control"/> 
                             </div>
                         </div>
 

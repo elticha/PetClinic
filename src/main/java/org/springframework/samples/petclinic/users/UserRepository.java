@@ -24,4 +24,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query("SELECT user FROM User user WHERE user.id <=:id")
     @Transactional(readOnly = true)
     Collection<User> findById2(@Param("id") Integer id);
+    
+    User findByUsername(String username);
 }

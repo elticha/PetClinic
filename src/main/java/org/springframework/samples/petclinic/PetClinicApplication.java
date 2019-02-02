@@ -18,7 +18,6 @@ package org.springframework.samples.petclinic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * PetClinic Spring Boot Application.
@@ -31,8 +30,6 @@ public class PetClinicApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PetClinicApplication.class, args);
-        BCryptPasswordEncoder c = new BCryptPasswordEncoder();
-        System.out.println("\n\nPass => " + c.encode("12345")+"\n\n");
+        System.out.println("\n\n===> Aplicación iniciada correctamente\n\n");
     }
-
 }

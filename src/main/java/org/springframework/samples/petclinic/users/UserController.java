@@ -41,30 +41,43 @@ public class UserController {
        // model.put("users", this.users.allUser());
         return "users/Users";
     }
+    
+    // Parte del Login y el registro de usuarios ********
+    
+    @RequestMapping(value={"/"}, method = RequestMethod.GET)
+    public ModelAndView login(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("auth/Login");
+        return modelAndView;
+    }    
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView registration() {
         ModelAndView modelAndView = new ModelAndView();
         User user = new User();
         modelAndView.addObject("user", user);
-        modelAndView.setViewName("users/Registro");
+        modelAndView.setViewName("auth/Registro");
         return modelAndView;
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        
+        User userExists = userService.findUserByUsername(user.getUsername());
+        if (userExists != null) {
+            bindingResult
+                    .rejectValue("username", "error.user",
+                            "Ya existe un usuario con ese nombre");
+        }
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("users/Registro");
+            modelAndView.setViewName("auth/Registro");
         } else {
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "El usuario ha sido registrado exitosamente");
             modelAndView.addObject("textoLogin", "Ir a Login");
             modelAndView.addObject("user", new User());
-            modelAndView.setViewName("users/Registro");
-
+            modelAndView.setViewName("auth/Registro");
         }
         return modelAndView;
-    }
+    } 
 }
