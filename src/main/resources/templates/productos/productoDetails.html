@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'producto')}">
+    <body>
+        <h2 >Información del Producto</h2>
+
+
+        <table class="table table-striped" th:object="${producto}">
+            <tr>
+                <th>Nombre: </th>
+                <td><b th:text="*{nombre}"></b></td>
+            </tr>
+            <tr>
+                <th>Descripción: </th>
+                <td th:text="*{descripcion}" /></td>
+            </tr>
+            <tr>
+                <th>Número de Serie: </th>
+                <td th:text="*{numero_serie}" /></td>
+            </tr>
+            <tr>
+                <th>Cantidad: </th>
+                <td th:text="*{cantidad}" /></td>
+            </tr>
+            <tr>
+                <th>Precio: </th>
+                <td th:text="*{precio}" /></td>
+            </tr>
+        </table>
+
+        <a th:href="@{{id}/edit(id=${producto.id})}" class="btn btn-default">Editar Producto</a>
+      
+      
+      
+      <a th:text="'Eliminar'" th:href="@{{id}/delete(id=${producto.id})}" class="btn btn-danger">Editar Producto</a>
+      
+  
+    <br />
+    <br />
+    <br />
+  
+    </body>
+</html>

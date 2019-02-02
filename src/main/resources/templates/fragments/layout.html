@@ -18,7 +18,9 @@
     <![endif]-->
 
     <link rel="stylesheet" th:href="@{/resources/css/petclinic.css}"/>
-
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.52.0/mapbox-gl.css' rel='stylesheet' />
   </head>
 
 <body>
@@ -62,6 +64,11 @@
                   <li th:replace="::menuItem ('/medicamento/find','medicamento','medicamentos','th-list','Medicamentos')">
                       <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                       <span>Medicamentos</span>
+                  </li>
+                  
+                  <li th:replace="::menuItem ('/producto/find','producto','producto','th-list','Productos')">
+                      <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                      <span>Productos</span>
                   </li>
                   
                     <li th:replace="::menuItem ('/Reportes.html','rep','reps','th-list','Reportes')">
