@@ -9,8 +9,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
@@ -36,30 +34,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.
-                authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/registration").permitAll()
-                .antMatchers("/welcome").permitAll()
-                .antMatchers("/home").permitAll()
-                .antMatchers("/owners/find").permitAll()
-                .antMatchers("/vets/find").permitAll()
-                .antMatchers("/medicamento/find").permitAll()
-                .antMatchers("/Reportes.html").permitAll()
-                .antMatchers("/owners/{ownerId}/edit").permitAll()
-                .antMatchers("/users/report").permitAll()
-                //.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
-                .antMatchers("/**").hasAuthority("USER").anyRequest()
-                .authenticated().and().csrf().disable().formLogin()
-                .loginPage("/").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/welcome")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .and().logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/").and().exceptionHandling()
-                .accessDeniedPage("/access-denied");
+        http
+          .csrf().disable()
+          .authorizeRequests()
+          .antMatchers("/login*").permitAll()
+          .antMatchers("/register*").permitAll()
+          .anyRequest().authenticated()
+          .and()
+          .formLogin()
+          .loginPage("/login")
+          .defaultSuccessUrl("/welcome", true)
+          .failureUrl("/login?error=true")
+          .and()
+          .logout()
+          .logoutUrl("/logout");
     }
 
     @Override
