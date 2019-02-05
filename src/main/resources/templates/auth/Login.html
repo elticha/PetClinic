@@ -23,15 +23,13 @@
                         <h3 class="form-signin-heading" th:text="Bienvenido"></h3>
                         <br/>
 
-                        <input type="text" id="username" name="username"  placeholder="Nombre de usuario"
-                               class="form-control" /> <br/> 
-                        <input type="password"  placeholder="Contraseña"
-                               id="password" name="password" class="form-control" /> <br /> 
+                        <input type="text" id="username" name="username"  placeholder="Nombre de usuario" class="form-control" required/> <br/> 
+                        <input type="password"  placeholder="Contraseña" id="password" name="password" class="form-control" required/> <br /> 
 
                         <div align="center" th:if="${param.error}">
                             <p style="font-size: 20; color: #FF1C19;">Nombre de usuario o contraseña incorrectos</p>
                         </div>
-                        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login">Iniciar</button>
+                        <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Iniciar">Iniciar</button>
                     </form>
                 </div>
             </div>

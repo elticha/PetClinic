@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'user')}">
+
+    <body>
+
+        <h2>Usuario</h2>
+        <form autocomplete="off" th:object="${user}" class="form-horizontal" id="add-user-form" method="post">
+            <div class="form-group has-feedback">
+                <input th:replace="~{fragments/inputField :: input ('Nombre de Usuario', 'username', 'text')}" />
+                <input th:replace="~{fragments/inputField :: input ('Contraseña', 'password', 'pass')}" />
+                <input th:replace="~{fragments/inputField :: input ('Email', 'email', 'email')}" />
+                <input th:replace="~{fragments/inputField :: input ('Código Postal', 'codigopostal', 'cp')}" />
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button
+                        th:with="text=${user.enabled} ? 'Actualizar usuario' : 'Añadir usuario'"
+                        class="btn btn-default" type="submit" th:text="${text}">Algo de Usuario gg</button>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

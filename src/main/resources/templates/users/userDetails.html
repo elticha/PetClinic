@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body},'user')}">
+
+    <body>
+        <h2>Información del Usuario</h2>
+
+        <table class="table table-striped" th:object="${user}">
+            <tr>
+                <th>Nombre de usuario</th>
+                <td><b th:text="*{username}"></b></td>
+            </tr>
+            <tr>
+                <th>Contraseña</th>
+                <td th:text="*{password}" /></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td th:text="*{email}" /></td>
+            </tr>
+            <tr>
+                <th>Estado</th>
+                <td th:text="*{enabled} ? 'Activo' : 'No activo'" /></td>
+            </tr>
+            <tr>
+                <th>Código Postal</th>
+                <td th:text="*{codigopostal}" /></td>
+            </tr>
+        </table>
+
+        <a th:href="@{{id}/edit(id=${user.id})}" class="btn btn-default">Editar Usuario</a>
+
+        <a th:text="'Eliminar'" th:href="@{{id}/delete(id=${user.id})}" class="btn btn-danger">Eliminar</a>  
+
+        <br />
+        <br />
+        <br />
+
+    </body>
+</html>

@@ -23,26 +23,26 @@
                         <div class="form-group">
                             <div class="col-sm-9">
                                 <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="validation-message"></label>
-                                <input type="text" th:field="*{username}" placeholder="Nombre de usuario" class="form-control"/> 
+                                <input type="text" th:field="*{username}" placeholder="Nombre de usuario" class="form-control" required /> 
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-9">
                                 <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="validation-message"></label>
-                                <input type="password" th:field="*{password}" placeholder="Contrasena" class="form-control" /> 
+                                <input type="password" th:field="*{password}" placeholder="Contrasena" class="form-control" required /> 
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-9">
                                 <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message"></label>
-                                <input type="text" th:field="*{email}" placeholder="Email" class="form-control" />
+                                <input type="email" th:field="*{email}" placeholder="Email" class="form-control" required />
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-9">
                                 <label th:if="${#fields.hasErrors('codigopostal')}" th:errors="*{codigopostal}" class="validation-message"></label>
-                                <input type="text" th:field="*{codigopostal}" placeholder="Codigo Postal" class="form-control" />
+                                <input type="number" th:field="*{codigopostal}" placeholder="Codigo Postal" title="Se evaluará si existe este código postal" class="form-control" minlength="5" maxlength="5" required />
                             </div>
                         </div>
 
