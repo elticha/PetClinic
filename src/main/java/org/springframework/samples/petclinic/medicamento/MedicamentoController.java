@@ -5,6 +5,9 @@
  */
 package org.springframework.samples.petclinic.medicamento;
 
+import java.util.Collection;
+import java.util.Map;
+import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,10 +17,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.validation.Valid;
-import java.util.Collection;
-import java.util.Map;
 
 /**
  *
@@ -144,5 +143,4 @@ public class MedicamentoController {
                 
         return "redirect:/medicamento?nombre=";
     }
-        
 }

@@ -19,9 +19,19 @@ import org.springframework.transaction.annotation.Transactional;
  * @author David Pérez S.
  */
 @Repository("userRepository")
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Integer> {
     
     @Query("SELECT user FROM User user WHERE user.id <=:id")
     @Transactional(readOnly = true)
     Collection<User> findById2(@Param("id") Integer id);
+    
+    @Query("SELECT user FROM User user WHERE user.id =:id")
+    @Transactional(readOnly = true)
+    User findById3(@Param("id") Integer id);
+    
+    @Query("SELECT user FROM User user WHERE user.username LIKE :username%")
+    @Transactional(readOnly = true)
+    Collection<User> findAllByUsername(@Param("username") String username);
+    
+    User findByUsername(String username);
 }

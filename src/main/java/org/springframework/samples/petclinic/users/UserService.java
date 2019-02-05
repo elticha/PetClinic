@@ -20,9 +20,9 @@ import org.springframework.stereotype.Service;
 @Service("userService")
 public class UserService {
     
-    private UserRepository userRepository;
-    private AuthorityRepository authorityRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserRepository userRepository;
+    private final AuthorityRepository authorityRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     
     @Autowired
     public UserService(UserRepository userRepository, AuthorityRepository authorityRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -31,14 +31,19 @@ public class UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
     
-    public void saveUser(User user) {
+    public User findUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }    
+    
+    public void saveUser(User user, boolean actualizar) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(1);
-        Authority authority = new Authority();
-        authority.setUsername(user.getUsername());
-        authority.setAuthority("USER");
         userRepository.save(user);
-        System.out.println("\n\nNombre de 'user' de la autoridad: "+authority.getUsername()+"\n");
-        authorityRepository.save(authority);
+        if(actualizar) {
+            Authority authority = new Authority();
+            authority.setUsername(user.getUsername());
+            authority.setAuthority("USER");
+            authorityRepository.save(authority);
+        }
     }
 }
