@@ -3,7 +3,6 @@ package org.springframework.samples.petclinic.system;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.GregorianCalendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +15,7 @@ class WelcomeController {
     @Autowired
     private LogRepository lr;
 
-    @GetMapping("/")
+    @GetMapping("/welcome")
     public String welcome() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");

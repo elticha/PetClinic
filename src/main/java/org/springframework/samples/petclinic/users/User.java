@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 /**
  * @author David Pérez S.
  */
@@ -25,8 +26,8 @@ public class User {
     @Column(name = "idusuarios")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "username", nullable = false)
+    
+    @Column(name = "username")
     private String username;
 
     @Column(name = "password", nullable = false)
@@ -43,7 +44,7 @@ public class User {
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "authority")
-    //private Authority authority;
+//    private Authority authority;
 
     public Integer getId() {
         return this.id;

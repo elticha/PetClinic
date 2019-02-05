@@ -9,10 +9,12 @@
 package org.springframework.samples.petclinic.authority;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author David Pérez S.
  */
+@Repository("authorityRepository")
 public interface AuthorityRepository extends JpaRepository<Authority, Integer> {
-    // XD
+    Authority findByAuthority(String authority);
 }

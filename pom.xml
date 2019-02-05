@@ -140,6 +140,14 @@
             <version>5.2.0.BUILD-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
+        
+        <!-- JSON (JSON parser to String) -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180813</version>
+        </dependency>
+
     </dependencies>
 
     <build>
