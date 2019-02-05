@@ -35,15 +35,13 @@ public class UserService {
         return userRepository.findByUsername(username);
     }    
     
-    public void saveUser(User user, boolean actualizar) {
+    public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(1);
         userRepository.save(user);
-        if(actualizar) {
-            Authority authority = new Authority();
-            authority.setUsername(user.getUsername());
-            authority.setAuthority("USER");
-            authorityRepository.save(authority);
-        }
+        Authority authority = new Authority();
+        authority.setUsername(user.getUsername());
+        authority.setAuthority("USER");
+        authorityRepository.save(authority);
     }
 }

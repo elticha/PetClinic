@@ -63,7 +63,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return VIEW_USERS;
         } else {
-            this.userService.saveUser(user, false);
+            this.userService.saveUser(user);
             return "redirect:/user/find";
         }
     }
@@ -142,7 +142,7 @@ public class UserController {
             return VIEW_USERS;
         } else {
             user.setId(userId);
-            this.userService.saveUser(user, true);
+            this.userService.saveUser(user);
             return "redirect:/user/{userId}";
         }
     }
