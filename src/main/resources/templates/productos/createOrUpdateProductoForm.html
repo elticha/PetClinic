@@ -4,7 +4,7 @@
     <body>
 
         <h2>Medicamento</h2>
-        <form th:object="${producto}" class="form-horizontal" id="add-producto-form" method="post">
+        <form th:object="${producto}" class="form-horizontal" id="add-producto-form" method="post" enctype="multipart/form-data">
             <div class="form-group has-feedback">
                 <input
                     th:replace="~{fragments/inputField :: input ('Nombre', 'nombre', 'text')}" />
@@ -19,8 +19,7 @@
 
                 <input  id="archivo" value="Seleccionar" name="file" type="file"/>
                 
-                <input id="foto" type="hidden" name="file" value=""/>
-                <input />
+                <input id="foto" type="hidden" name="files" value=""/>
 
             </div>
             <div class="form-group">

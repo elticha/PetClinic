@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +31,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ProductoController {
-    private static String UPLOADED_FOLDER = "F://temp//";
+    private static String UPLOADED_FOLDER = "C://Users//bodeg//Pictures//Saved Pictures//";
     private static final String VIEW_PRODUCTOS = "productos/createOrUpdateProductoForm";
-    private static String direccionUrl = System.getProperty("user.dir")+"/src/main/resources/static/resources/imagenes";
+    private static String direccionUrl = System.getProperty("user.dir")+"//src//main//resources//static//resources//images//";
     private final ProductoRepository producto;
 
     public ProductoController(ProductoRepository productos) {
@@ -52,17 +53,19 @@ public class ProductoController {
     }
 
     @PostMapping("/producto/new")
-    public String processCreationForm(@RequestParam("file") MultipartFile[]f, @Valid Producto producto, BindingResult result) throws IOException {
+    public String processCreationForm(MultipartFile file, @Valid Producto producto, BindingResult result) throws IOException {
        StringBuilder filesNames = new StringBuilder();
         if (result.hasErrors()) {
             return VIEW_PRODUCTOS;
         } else {
-            for(MultipartFile file:f){
-                Path fileNameAndPath = Paths.get(direccionUrl, file.getOriginalFilename());
-                filesNames.append(file.getOriginalFilename());
-                Files.write(fileNameAndPath, file.getBytes());
-            }
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+            Files.write(path, bytes);
+            System.out.println(path.toString());
             
+            Path o = Paths.get(path.toString());
+            Path d = Paths.get(direccionUrl+file.getOriginalFilename());
+            Files.copy(o, d, StandardCopyOption.REPLACE_EXISTING);
             this.producto.save(producto);
             return "redirect:/producto/find";
         }
@@ -135,7 +138,7 @@ public class ProductoController {
     public String listadoDeProductos(Producto producto, BindingResult result, Map<String, Object> model) {
         Collection<Producto> results = this.producto.buscarProductos();
         if (results.isEmpty()) {
-            return "productos/findProducto";
+            return "productos/findProductos";
         } else {
             model.put("selections", results);
             return "productos/productosReport";
