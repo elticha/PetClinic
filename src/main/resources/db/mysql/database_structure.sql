@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-02-2019 a las 07:15:02
+-- Tiempo de generación: 05-02-2019 a las 01:57:29
 -- Versión del servidor: 10.1.34-MariaDB
 -- Versión de PHP: 7.2.7
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `petclinic`
 --
+CREATE DATABASE IF NOT EXISTS `petclinic` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `petclinic`;
 
 -- --------------------------------------------------------
 
@@ -33,12 +35,15 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `authorities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) DEFAULT NULL,
-  `authority` varchar(45) DEFAULT 'USER',
-  PRIMARY KEY (`id`)
+  `authority` varchar(45) NOT NULL DEFAULT 'USER',
+  PRIMARY KEY (`id`),
+  KEY `a_fk` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- RELACIONES PARA LA TABLA `authorities`:
+--   `username`
+--       `usuarios` -> `username`
 --
 
 -- --------------------------------------------------------
@@ -198,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `types` (
 --
 -- Estructura de tabla para la tabla `usuarios`
 --
--- Creación: 31-01-2019 a las 05:03:26
+-- Creación: 04-02-2019 a las 20:57:22
 --
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
@@ -206,9 +211,10 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `username` varchar(45) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(45) NOT NULL,
-  `enabled` int(11) DEFAULT '1',
+  `enabled` int(11) NOT NULL DEFAULT '1',
   `codigopostal` varchar(10) NOT NULL,
-  PRIMARY KEY (`idusuarios`)
+  PRIMARY KEY (`idusuarios`),
+  KEY `username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -288,6 +294,12 @@ CREATE TABLE IF NOT EXISTS `visits` (
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `authorities`
+--
+ALTER TABLE `authorities`
+  ADD CONSTRAINT `a_fk` FOREIGN KEY (`username`) REFERENCES `usuarios` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `pets`
