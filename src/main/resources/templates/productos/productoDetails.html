@@ -24,6 +24,10 @@
                 <th>Precio: </th>
                 <td th:text="*{precio}" /></td>
             </tr>
+            <tr>
+                <th>Foto: </th>
+                <td><img style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px;" th:src="@{/resources/images/__${producto.files}__}"></td>
+            </tr>
         </table>
 
         <a th:href="@{{id}/edit(id=${producto.id})}" class="btn btn-default">Editar Producto</a>

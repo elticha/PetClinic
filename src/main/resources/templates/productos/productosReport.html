@@ -23,7 +23,7 @@
                     <td th:text="${producto.numero_serie}"/>
                     <td th:text="${producto.cantidad}"/>
                     <td th:text="${producto.precio}"/>
-                    <td><img style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px;" th:src="@{/resources/images/__${producto.files}__}"></td>
+                    <td th:if="${producto.files} != ''"><img title="No hay imagen" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; width: 150px;" th:src="@{/resources/images/__${producto.files}__}"></td>
                 </tr>
             </tbody>
         </table>

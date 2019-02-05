@@ -92,11 +92,11 @@ public class ProductoController {
             return "productos/findProductos";
         } else if (results.size() == 1) {
             producto = results.iterator().next();
-            return "redirect:/producto/" + producto.getId();
+            return "redirect:/productos/" + producto.getId();
         } else {
            
             model.put("selections", results);
-            return "producto/productoList";
+            return "productos/productoList";
         }
     }
     
@@ -112,6 +112,7 @@ public class ProductoController {
     public String initUpdateProductoForm(@PathVariable("productoId") int productoId, Model model) {
         Producto producto = this.producto.findById(productoId);
         model.addAttribute(producto);
+        
         return VIEW_PRODUCTOS;
     }
     
