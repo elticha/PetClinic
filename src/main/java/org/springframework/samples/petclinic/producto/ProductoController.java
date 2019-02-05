@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.validation.Valid;
 import java.util.Collection;
 import java.util.Map;
+import org.springframework.samples.petclinic.owner.Owner;
+import org.springframework.samples.petclinic.system.Log;
+import org.springframework.samples.petclinic.system.LogRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,7 +54,7 @@ public class ProductoController {
         model.put("producto", producto);
         return VIEW_PRODUCTOS;
     }
-
+   
     @PostMapping("/producto/new")
     public String processCreationForm(MultipartFile file, @Valid Producto producto, BindingResult result) throws IOException {
        StringBuilder filesNames = new StringBuilder();

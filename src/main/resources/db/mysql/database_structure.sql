@@ -149,9 +149,9 @@ CREATE TABLE IF NOT EXISTS `producto` (
   `Id` int(5) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
-  `numero_serie` varchar(50) NOT NULL,
-  `cantidad` int(8) NOT NULL,
-  `precio` float(10,0) NOT NULL,
+  `numero_serie` varchar(255) NOT NULL,
+  `cantidad` varchar(255) NOT NULL,
+  `precio` varchar(255) NOT NULL,
   `file` text,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
