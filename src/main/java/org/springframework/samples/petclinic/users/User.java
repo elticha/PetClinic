@@ -36,6 +36,12 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "ciudad")
+    private String ciudad;
+
+    @Column(name = "estado")
+    private String estado;
+
     @Column(name = "enabled")
     private Integer enabled;
 
@@ -60,6 +66,14 @@ public class User {
 
     public String getEmail() {
         return this.email;
+    }
+
+    public String getCiudad() {
+        return this.ciudad;
+    }
+
+    public String getEstado() {
+        return this.estado;
     }
 
     public Integer getEnabled() {
@@ -88,6 +102,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public void setEnabled(Integer enabled) {

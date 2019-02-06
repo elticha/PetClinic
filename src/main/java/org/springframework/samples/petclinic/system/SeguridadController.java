@@ -51,21 +51,17 @@ public class SeguridadController {
         User userExists = userService.findUserByUsername(user.getUsername());
         ComprobadorCodigoPostal cp = new ComprobadorCodigoPostal();
         
-        if(user.getUsername().equals("")) {
-            bindingResult.rejectValue("username", "error.user", "No puedes dejar el nombre de usuario en blanco");
-        } else if (userExists != null) {
+        if (userExists != null) {
             bindingResult.rejectValue("username", "error.user", "Ya existe un usuario con este nombre");
         }
-        if (user.getPassword().equals("")) {
-            bindingResult.rejectValue("password", "error.user", "No puedes dejar la contraseña en blanco");
-        }
-        if (user.getEmail().equals("")) {
-            bindingResult.rejectValue("email", "error.user", "No puedes dejar el email en blanco");
-        }
-        if(user.getCodigopostal().equals("")) {
-            bindingResult.rejectValue("codigopostal", "error.user", "No puedes dejar el código postal en blanco");
-        } else if (!cp.comprobarExisteCodigoPostal(user.getCodigopostal())) {
+        if (!cp.comprobarExisteCodigoPostal(user.getCodigopostal())) {
             bindingResult.rejectValue("codigopostal", "error.user", "Este código postal no existe");
+        }
+        if(!cp.getCiudad().contains(user.getCiudad())) {
+            bindingResult.rejectValue("ciudad", "error.user", "Esta ciudad no coincide con el código postal introducido");
+        }
+        if(!cp.getEstado().contains(user.getEstado())) {
+            bindingResult.rejectValue("estado", "error.user", "Este estado no coincide con el código postal introducido");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("auth/Registro");

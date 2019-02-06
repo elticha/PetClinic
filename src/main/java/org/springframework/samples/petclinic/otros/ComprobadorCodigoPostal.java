@@ -19,13 +19,37 @@ import org.json.JSONObject;
 public class ComprobadorCodigoPostal {
 
     private final String USER_AGENT = "Mozilla/5.0";
+    private String ciudad;
+    private String estado;
+    private boolean existeCP;
+    
+    public ComprobadorCodigoPostal() {
+        this.ciudad = "";
+        this.estado = "";
+        this.existeCP = false;
+    }
     
     public boolean comprobarExisteCodigoPostal(String codigoPostal) throws Exception {
-        String textoJSON = sendGet(codigoPostal);
-        JSONObject obj = new JSONObject(textoJSON);
-        boolean cp = !obj.getString("estado").equals("");
-        System.out.println("CP es: " + cp);
-        return cp;
+        String textoJSON = sendGet(codigoPostal);   // Obtenemos la respuesta JSON
+        JSONObject obj = new JSONObject(textoJSON); // Convetimos el texto JSON recibido a un objeto JSON
+        this.ciudad = obj.getString("municipio");  // Obtenemos la ciudad o municipio
+        this.estado = obj.getString("estado");  // Obtenemos el estado
+        
+        this.existeCP = !this.ciudad.equals("");
+        System.out.println("El CP existe: " + this.existeCP);
+        return existeCP;
+    }
+    
+    public String getCiudad() {
+        return this.ciudad;
+    }
+    
+    public String getEstado() {
+        return this.estado;
+    }
+    
+    public boolean getExisteCP() {
+        return this.existeCP;
     }
     
     // HTTP GET request

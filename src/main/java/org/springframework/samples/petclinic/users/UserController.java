@@ -73,6 +73,12 @@ public class UserController {
         if (!cp.comprobarExisteCodigoPostal(user.getCodigopostal())) {
             bindingResult.rejectValue("codigopostal", "error.user", "Este código postal no existe");
         }
+        if(!cp.getCiudad().contains(user.getCiudad())) {
+            bindingResult.rejectValue("ciudad", "error.user", "Esta ciudad no coincide con el código postal introducido");
+        }
+        if(!cp.getEstado().contains(user.getEstado())) {
+            bindingResult.rejectValue("estado", "error.user", "Este estado no coincide con el código postal introducido");
+        }        
         if (bindingResult.hasErrors()) {
             return VIEW_USERS;
         } else {
@@ -151,6 +157,12 @@ public class UserController {
         if (!cp.comprobarExisteCodigoPostal(user.getCodigopostal())) {
             bindingResult.rejectValue("codigopostal", "error.user", "Este código postal no existe");
         }
+        if(!cp.getCiudad().contains(user.getCiudad())) {
+            bindingResult.rejectValue("ciudad", "error.user", "Esta ciudad no coincide con el código postal introducido");
+        }
+        if(!cp.getEstado().contains(user.getEstado())) {
+            bindingResult.rejectValue("estado", "error.user", "Este estado no coincide con el código postal introducido");
+        }        
         if (bindingResult.hasErrors()) {
             return VIEW_USERS;
         } else {
