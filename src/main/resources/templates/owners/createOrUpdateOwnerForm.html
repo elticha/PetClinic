@@ -11,13 +11,13 @@
       <input
         th:replace="~{fragments/inputField :: input (#{ln}, 'lastName', 'text')}" />
       <input
-        th:replace="~{fragments/inputField :: input (#{ad}, 'address', 'text')}" />
+        th:replace="~{fragments/inputFieldEvent :: input (#{ad}, 'address', 'text')}"/>
       <input
-        th:replace="~{fragments/inputField :: input (#{cd}, 'city', 'text')}" />
+        th:replace="~{fragments/inputFieldEvent :: input (#{cd}, 'city', 'text')}"/>
       <input
-        th:replace="~{fragments/inputField :: input (#{edo}, 'estado', 'text')}" />
+        th:replace="~{fragments/inputFieldEvent :: input (#{edo}, 'estado', 'text')}"/>
       <input
-        th:replace="~{fragments/inputField :: input (#{cn}, 'country', 'text')}" />
+        th:replace="~{fragments/inputFieldEvent :: input (#{cn}, 'country', 'text')}"/>
       <input
         th:replace="~{fragments/inputField :: input (#{tf}, 'telephone', 'text')}" />
     </div>
@@ -30,5 +30,69 @@
       </div>
     </div>
   </form>
+  <div id='map' class="map"></div>
+  
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoidG90b2ciLCJhIjoiY2pyOWVjMmsyMGExNzN5bW00bmV0Y28wNCJ9.j5ehwrvxguCDgCl-9Ah2LA';
+      
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/light-v10',
+            center: [10, 10], 
+            zoom: 15
+        });
+
+        var geojson = {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [10, 10]
+            },
+            properties: {
+              title: 'Mapbox',
+              description: 'Casa'
+           }
+        }
+
+        // create a HTML element for each feature
+        var el = document.createElement('div');
+        el.className = 'marker';
+
+        // make a marker for each feature and add to the map
+        var marker=new mapboxgl.Marker(el)
+          .setLngLat(geojson.geometry.coordinates)
+          .addTo(map);
+            
+      function find(){
+        toto().then(res =>{
+            marker.setLngLat([parseFloat(res.long), parseFloat(res.lat)]);
+            map.jumpTo({
+                center: [parseFloat(res.long),parseFloat(res.lat)],
+                zoom: 15
+            });
+        }).catch(err => console.log(err));
+      }
+
+      async function toto() {
+        address = document.getElementsByClassName("toto-address")[0].value;
+        city = document.getElementsByClassName("toto-address")[1].value;
+        edo = document.getElementsByClassName("toto-address")[2].value;
+        country = document.getElementsByClassName("toto-address")[3].value;
+        
+        var encodedUrl = encodeURIComponent(address+' '+city+' '+edo+' '+country);
+
+        var resp = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${encodedUrl}.json?access_token=pk.eyJ1IjoidG90b2ciLCJhIjoiY2pyOWVjMmsyMGExNzN5bW00bmV0Y28wNCJ9.j5ehwrvxguCDgCl-9Ah2LA`);
+
+        if(resp.data.features.length == 0){
+            throw new Error('No hay resultados para la dirección');
+        }
+
+        return {
+            lat: resp.data.features[1].geometry.coordinates[1],
+            long: resp.data.features[1].geometry.coordinates[0]
+        }
+      }
+    </script>
+
 </body>
 </html>
