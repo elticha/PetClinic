@@ -25,6 +25,14 @@ public class FailedAuthListener {
         String username = (String) e.getAuthentication().getPrincipal();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        this.lr.save(new Log("[ Error de credenciales ] El usuario " + username + " ha intentado acceder a las " + dtf.format(now)));
+        try
+        {
+            System.out.println("Guardando...");
+            this.lr.save(new Log("[ Error de credenciales ] El usuario " + username + " ha intentado acceder a las " + dtf.format(now)));
+        }
+        catch(Exception er)
+        {
+            er.printStackTrace();
+        }
     }
 }
