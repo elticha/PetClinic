@@ -1,13 +1,20 @@
 package org.springframework.samples.petclinic.system;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Collection;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Fernando
  */
 
-public interface LogRepository extends JpaRepository<Log, Integer>{
+public interface LogRepository extends Repository<Log, Integer>{
     
+    @Query("SELECT informacion FROM Log log")
+    @Transactional(readOnly = true)
+    Collection<Log> getAll();
+    
+    void save(Log log);
 }

@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.otros.ComprobadorCodigoPostal;
+import org.springframework.samples.petclinic.system.Log;
+import org.springframework.samples.petclinic.system.LogRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +34,9 @@ public class UserController {
     private final UserRepository users;
     
     @Autowired
+    private LogRepository lr;
+    
+    @Autowired
     private UserService userService;
 
     public UserController(UserRepository users) {
@@ -48,6 +53,14 @@ public class UserController {
         User user = new User();
         model.put("user", user);
         return VIEW_USERS;
+    }
+    
+    @GetMapping("/logs")
+    public String getLogs(Map<String,Object> model){
+        System.out.println("Obteniendo logs....");
+        Collection<Log> logs = this.lr.getAll();
+        model.put("logs",logs);
+        return "logs/reports";
     }
 
     @PostMapping("/user/new")
