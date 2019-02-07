@@ -14,6 +14,8 @@
         <th> Contraseña </th>
         <th> Email </th>
         <th> Estado </th>
+        <th> Ciudad </th>
+        <th> Estado </th>
         <th> Código Postal </th>
       </tr>
     </thead>
@@ -23,6 +25,8 @@
         <td th:text="${user.password}"></td>
         <td th:text="${user.email}"></td>
         <td th:text="${user.enabled} ? 'Activo' : 'No activo'"></td>
+        <td th:text="${user.ciudad}"></td>
+        <td th:text="${user.estado}"></td>
         <td th:text="${user.codigopostal}"></td>
       </tr>
     </tbody>
