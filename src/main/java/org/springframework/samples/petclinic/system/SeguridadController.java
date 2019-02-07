@@ -66,6 +66,7 @@ public class SeguridadController {
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("auth/Registro");
         } else {
+            user.setEnabled(1);
             userService.saveUser(user);
             modelAndView.addObject("successMessage", "El usuario ha sido registrado exitósamente");
             modelAndView.addObject("textoLogin", "Ir a Login");

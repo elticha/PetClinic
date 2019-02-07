@@ -82,6 +82,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return VIEW_USERS;
         } else {
+            user.setEnabled(1);
             this.userService.saveUser(user);
             return "redirect:/user/find";
         }
@@ -167,6 +168,8 @@ public class UserController {
             return VIEW_USERS;
         } else {
             user.setId(userId);
+            System.out.println("usuario enabled: "+user.getEnabled());
+            user.setEnabled(user.getEnabled());
             this.userService.saveUser(user);
             return "redirect:/user/{userId}";
         }

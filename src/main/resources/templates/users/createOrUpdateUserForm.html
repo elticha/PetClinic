@@ -12,10 +12,9 @@
                 <input th:replace="~{fragments/inputField :: input ('Ciudad', 'ciudad', 'text')}" />
                 <input th:replace="~{fragments/inputField :: input ('Estado', 'estado', 'text')}" />
                 <input th:replace="~{fragments/inputField :: input ('Código Postal', 'codigopostal', 'cp')}" />
-                <label class="switch">
-                    <span class="slider round">Activo</span>
-                    <input type="checkbox">
-                </label>
+                <input th:replace="~{fragments/inputField :: input ('Estado', 'enabled', 'text')}" />
+                <!-- <label class="col-sm-2 control-label">Estado</label> -->
+                <!-- <input id="ck" class="form-control" onClick="javascript:cambiarEstado()" type="checkbox" th:value="${user.enabled}" th:checked="${user.enabled} ? 'true':'false'"/> -->
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
@@ -25,5 +24,18 @@
                 </div>
             </div>
         </form>
+        
+        <script>
+            function cambiarEstado() {
+                var bandera = document.getElementById("ck").checked;
+                var ck = document.getElementById("ck");
+                if(bandera)
+                    bandera = 1;
+                else
+                    bandera = 0;
+                ck.setAttribute("value", bandera);
+                console.log(bandera)
+            }
+        </script>
     </body>
 </html>

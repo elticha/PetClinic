@@ -37,7 +37,6 @@ public class UserService {
     
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setEnabled(1);
         userRepository.save(user);
         Authority authority = new Authority();
         authority.setUsername(user.getUsername());

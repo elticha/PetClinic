@@ -14,6 +14,7 @@
                 <input th:case="'email'" class="form-control" type="email" th:field="*{__${name}__}" required />
                 <input th:case="'cp'" class="form-control" type="number" th:field="*{__${name}__}" placeholder="Inserta un código postal que de verdad exista" title="Se evaluará si existe este código postal" minlength="5" maxlength="5" required />
                 <input th:case="'pass'" class="form-control" type="password" th:field="*{__${name}__}" required />
+                <input th:case="'check'" class="form-control" type="checkbox" th:value="*{__${name}__}" th:checked="${user.enabled} ? 'checked':''"/>
             </div>
           <span th:if="${valid}"
             class="glyphicon glyphicon-ok form-control-feedback"
